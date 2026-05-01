@@ -1,0 +1,169 @@
+@font-face {
+    font-family: 'MyFonts';
+    src: url('assets/Fonts/heading.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MyFonts';
+    src: url('assets/Fonts/paragraph.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+body {
+    margin: 0;
+    background: rgb(37, 37, 37);/*linear-gradient(pink,rgb(255, 227, 231)); */
+    color: rgb(255, 255, 255);
+    font-family: 'MyFonts', sans-serif;
+}
+
+header {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: url('assets/Image/sakura_scenery_background.jpg') top/cover no-repeat;
+    border: 2px solid white;
+    border-radius: 20px;
+    box-shadow:
+        0 0 10px rgba(255,255,255,0.5),
+        0 0 20px rgba(255,255,255,0.3);
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+header * {
+    position: relative;
+    z-index: 1;
+}
+
+.herotext {
+    text-align: center;
+    color: white;
+}
+
+.herotext p {
+    text-align: right;
+    width: 100%;
+}
+
+hr{
+    border: none;
+    height: 2px;
+    width: 80%;
+    box-shadow:
+        0 0 10px rgba(255,255,255,0.5),
+        0 0 20px rgba(255,255,255,0.3);
+    margin: 20px auto;
+    background: linear-gradient(to right, transparent, white, transparent);
+}
+
+h1 {
+    margin: 0 0 2px 0;
+    font-size: 60px;
+    text-shadow:
+        0 0 6px rgba(255,255,255,0.5),
+        0 0 12px rgba(255,255,255,0.2);
+}
+
+p {
+    margin: 0;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+nav {
+    position: absolute;
+    bottom: 80px;
+    border: 2px solid white;
+    border-radius: 6px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+a {
+    color: white;
+    text-decoration: underline;
+}
+
+th{
+    font-family: 'MyFonts',sans-serif;
+    font-style: normal;
+    align-items: center;
+    border: 2px solid black;
+    margin: 2px auto;
+    padding: 4px;
+    text-align: center;
+    color: rgb(44, 44, 44);
+}
+
+td{
+    align-items: center;
+    border: 2px solid black;
+    margin: 2px auto;
+    padding: 4px;
+    text-align: center;
+    color: rgb(44, 44, 44);
+    font-style:oblique;
+}
+
+.character-sheet {
+    background: rgb(217, 223, 172);
+    width: 600px;
+    margin: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #000000;
+    border-radius: 6px;
+}
+
+.topsection {
+    display: flex;
+}
+
+.statssection {
+    font-family: 'MyFonts',sans-serif;
+    font-style: italic;
+    color: rgb(44, 44, 44);
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.bottomsection{
+    font-family: 'MyFonts',sans-serif;
+    font-style: italic;
+    color: rgb(44, 44, 44);
+}
+
+.paragraph{
+    display: flex;
+    flex-direction: column;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+footer {
+    background: black;
+    color: white;
+}

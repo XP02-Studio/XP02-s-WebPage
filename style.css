@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'MyFonts';
+    src: url('assets/Fonts/heading.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MyFonts';
+    src: url('assets//Fonts/paragraph.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+
+body{
+    font-family: 'MyFonts',sans-serif;
+    background-image: linear-gradient(pink,white);
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    width: auto;
+    height: 640px;
+}
+
+header{
+    font-family: 'MyFonts',sans-serif;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-size:xx-large;
+}
+
+p{
+    color: black;
+    font-style: italic;
+}
+
+.mainmenusec{
+    color: rgb(239, 146, 162);
+}
