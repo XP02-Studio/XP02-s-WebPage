@@ -47,6 +47,13 @@ header {
         0 0 12px rgba(255,255,255,0.2);
 }
 
+h1{
+    text-shadow:         
+        0 0 8px rgba(138, 180, 248, 0.6),
+        0 0 16px rgba(138, 180, 248, 0.4),
+        0 0 24px rgba(138, 180, 248, 0.2);;
+}
+
 p {
     color: #b0b0b0;
     font-style: italic;

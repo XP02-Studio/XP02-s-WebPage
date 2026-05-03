@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XP02's Portfolio</title>
     <link rel="stylesheet" href="portfolio_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -73,25 +74,25 @@
     <section id="about">
         <h2>About</h2>
         <div class="paragraph">
-            <p>Currently on the main quest of pursuing a B.Tech CSE, I'm moving toward my goal of becoming a game developer. As a solo developer, I enjoy exploring ideas, building systems from scratch, and turning them into playable experiences. Along with development, I also create my own assets, giving me full control over both design and functionality. Using tools like Godot and web technologies, I treat every project as a chance to learn, experiment, and level up.</p>
+            <p>Currently on the main quest of Game Development, I'm moving toward my goal of becoming a game developer. As a solo developer, I enjoy exploring ideas, building systems from scratch, and turning them into playable experiences. Along with development, I also create my own assets, giving me full control over both design and functionality. Using tools like Godot and web technologies, I treat every project as a chance to learn, experiment, and level up.</p>
             <p>Alongside my main quest, I've taken on side quests in web and software development. I'm currently in the early stages, learning and experimenting with new technologies to broaden my abilities. With some experience in Android Studio, I'm gradually working toward building more complete and practical applications in these areas.</p>
             <ul>
                 <li>
                     <details>
                         <summary>B.Tech (4th sem)</summary>
-                        <p>Pursuing B.tech from Swami Vivekanada University, Barackpore, West Bengal, India. Currently in 2nd year 4th sem with a previous YGPA of 8.45</p>
+                        <p class="detailp">Pursuing B.tech from Swami Vivekanada University, Barackpore, West Bengal, India. Currently in 2nd year 4th sem with a previous YGPA of 8.45</p>
                     </details>
                 </li>
                 <li>
                     <details>
                         <summary>Higher Secondary</summary>
-                        <p>Studied Class 11th and 12 from  Anglo Vernacular High School, Titagarh, West Bengal, India. Got 71% in 12th WBCHSE with subjects PCM</p>
+                        <p class="detailp">Studied Class 11th and 12 from  Anglo Vernacular High School, Titagarh, West Bengal, India. Got 71% in 12th WBCHSE</p>
                     </details>
                 </li>
                 <li>
                     <details>
                         <summary>10th Boards</summary>
-                        <p>Studied Class 10th from Indira Memorial English Medium High School, Khardaha, West Bengal, India. Got 83% in ICSE.</p>
+                        <p class="detailp">Studied Class 10th from Indira Memorial English Medium High School, Khardaha, West Bengal, India. Got 83% in ICSE.</p>
                     </details>
                 </li>
             </ul>
@@ -137,13 +138,47 @@
             <p>Coming Soon...</p>
         </div>
     </section><hr>
-
     <section id="dailyquest">
         <h2>Daily Quest</h2>
+        <div class="daily-card">
+            <ul class="quest-list">
+                <li><span class="icon">★</span> Create pixel art assets</li>
+                <li><span class="icon">⚙</span> Develop game logic & systems</li>
+                <li><span class="icon">🎮</span> Progress current project</li>
+                <li><span class="icon">⬆</span> Push updates to Git</li>
+                <li><span class="icon">🐞</span> Debug and fix issues</li>
+                <li><span class="icon">📘</span> Learn new tools</li>
+                <li><span class="icon">♻</span> Refactor code</li>
+                <li><span class="icon">🧪</span> Test gameplay</li>
+            </ul>
+        </div>
     </section><hr>
-
     <section id="sidequest">
         <h2>Side Quest</h2>
+        <div class="quest-block">
+            <h3>Web Development</h3>
+            <div class="side-scroll">
+                <div class="side-card">
+                    <h4>Ascii Art WebApp</h4>
+                    <p>Just upload photo and convert it into Acii Art.</p>
+                    <a href="samplepage.html" target="_blank" class="download-btn">View</a>
+                </div>
+                <div class="side-card">
+                    <h4>Portfolio Website</h4>
+                    <p>Personal portfolio built using HTML, CSS, and JavaScript.</p>
+                    <a href="portfolio.html" target="_blank" class="download-btn">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="quest-block">
+            <h3>AI / ML</h3>
+            <div class="side-scroll">
+                <div class="side-card locked">
+                    <h4>Coming Soon</h4>
+                    <p>Future projects will be added here.</p>
+                </div>
+            </div>
+        </div>
     </section><hr>
 
     <section id="otherquest">
@@ -154,8 +189,50 @@
         <h2>Skills</h2>
     </section><hr>
 
+    <section>
+        <h2>Contacts</h2>
+        <div class="contact-icons">
+            <a href="mailto:akchhatgupta2006@gmail.com" target="_blank">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="https://github.com/XP02-Studio" target="_blank">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/ayush-gupta-38a766351" target="_blank">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+        </div>
+    </section><hr>
+
     <footer>
-        Contact<p>hi</p>
+       <h3>Also Check Out My Party Members</h3>
+       <div class="favcontacts">
+        <p>Mystic Mage</p>
+            <a href="https://github.com/Mystifying7" target="_blank">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/rehan-alam-437a03375" target="_blank">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+        </div>
+        <div class="favcontacts">
+        <p>Divine Healer</p>
+            <a href="" target="_blank">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/binit-shaw-190811219" target="_blank">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+        </div>
+        <div class="favcontacts">
+        <p>Iron Tank</p>
+            <a href="" target="_blank">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/dhrubo-dey-98611b3bb" target="_blank">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+       </div>
     </footer>
     <script src="script.js"></script>
 </body>
