@@ -14,14 +14,14 @@ Accent:          #c792ea (optional purple touch) */
 
 @font-face {
     font-family: 'MyFonts';
-    src: url('assets/Fonts/heading.ttf') format('truetype');
+    src: url('../assets/Fonts/heading.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MyFonts';
-    src: url('assets/Fonts/paragraph.ttf') format('truetype');
+    src: url('../assets/Fonts/paragraph.ttf') format('truetype');
     font-weight: 400;
     font-style: italic;
 }
