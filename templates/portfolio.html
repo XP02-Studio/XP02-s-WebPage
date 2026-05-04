@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XP02's Portfolio</title>
-    <link rel="stylesheet" href="portfolio_style.css">
+    <link rel="stylesheet" href="../static/portfolio_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+    <div class="backnav">
+       
+    </div>
     <header>
         <div class="herotext">
             <h1>XP02's Journey</h1>
@@ -19,6 +22,7 @@
                 <li><a href="#dailyquest">Daily Quest</a></li>
                 <li><a href="#sidequest">Side Quest</a></li>
                 <li><a href="#otherquest">Other Quest</a></li>
+                <li><a href="../index.html">Main Menu</a></li>
             </ul>
         </nav>
     </header><hr>
@@ -28,7 +32,7 @@
         <div class="character-sheet">
             <div class="topsection">
                 <div>
-                    <img src="assets/Image/XP02_banner.png" alt="profile picture" style="width:100px; border-radius: 6px;">
+                    <img src="../assets/Image/XP02_banner.png" alt="profile picture" style="width:100px; border-radius: 6px;">
                 </div>
                 <table style="width: 430px; margin-left: 10px;">
                     <tr>
@@ -105,7 +109,7 @@
             <h3>Game Development</h3>
             <div class="game-scroll">
                 <div class="game-card">
-                    <img src="assets/Image/College_dash_icon.png" alt="picture">
+                    <img src="../assets/Image/College_dash_icon.png" alt="picture">
                     <h4>College Dash</h4>
                     <p class="skills">
                         Parallax Layers and Background<br>
@@ -161,7 +165,7 @@
                 <div class="side-card">
                     <h4>Ascii Art WebApp</h4>
                     <p>Just upload photo and convert it into Acii Art.</p>
-                    <a href="samplepage.html" target="_blank" class="download-btn">View</a>
+                    <a href="../samplepage.html" target="_blank" class="download-btn">View</a>
                 </div>
                 <div class="side-card">
                     <h4>Portfolio Website</h4>
@@ -183,10 +187,59 @@
 
     <section id="otherquest">
         <h2>Other Quest</h2>
+        <div class="quest-block">
+            <ul>
+                <li><b>Game Jams</b> - Working on Projects to participate in Game Jams. </li>                          <!--  - Participated in rapid game development challenges, building playable experiences under time constraints. -->
+                <li><b>Open Source / Community</b> - Exploring the World of Open Source to make contributions</li>                              <!--      - Exploring contributions to projects by fixing issues, improving features, and learning collaborative workflows. -->
+                <li><b>Learning & Experimentation</b> - Continuously exploring new tools, frameworks, and development techniques to expand my skill set.</li>
+                <li><b>Creative Exploration</b> - Designing pixel art, animations, and assets to enhance both the visual and interactive aspects of my projects.</li>
+                <li><b>Problem Solving</b> - Practicing logical thinking and coding challenges to strengthen development fundamentals.</li>
+                <li><b>Peer Support</b> - Assisting others with programming concepts, debugging, and project-related challenges.</li>
+                <li><b>Fitness & Discipline</b> - Maintaining consistency and focus through regular physical activity and structured routines.</li>
+            </ul>
+        </div>
     </section><hr>
 
     <section id="skills">
         <h2>Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Game Development</h3>
+                <ul>
+                    <li>Godot Engine</li>
+                    <li>2D Game Mechanics</li>
+                    <li>Weapon Systems</li>
+                    <li>Enemy AI Basics</li>
+                    <li>Save / Load Systems</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Web Development</h3>
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript (Basics)</li>
+                    <li>Responsive Design</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Tools & Software</h3>
+                <ul>
+                    <li>Git & GitHub</li>
+                    <li>Pixel Studio</li>
+                    <li>VS Code</li>
+                    <li>Android Studio (Basic)</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Creative</h3>
+                <ul>
+                    <li>Pixel Art</li>
+                    <li>Sprite Animation</li>
+                    <li>UI Design (Game HUD)</li>
+                </ul>
+            </div>
+        </div>
     </section><hr>
 
     <section>
@@ -234,6 +287,5 @@
             </a>
        </div>
     </footer>
-    <script src="script.js"></script>
 </body>
 </html>

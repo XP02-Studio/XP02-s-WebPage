@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'MyFonts';
-    src: url('assets/Fonts/heading.ttf') format('truetype');
+    src: url('../assets/Fonts/heading.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MyFonts';
-    src: url('assets/Fonts/paragraph.ttf') format('truetype');
+    src: url('../assets/Fonts/paragraph.ttf') format('truetype');
     font-weight: 400;
     font-style: italic;
 }
@@ -27,7 +27,7 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: url('assets/Image/sakura_scenery_background.jpg') top/cover no-repeat;
+    background: url('../assets/Image/sakura_scenery_background.jpg') top/cover no-repeat;
     border: 2px solid white;
     border-radius: 20px;
     box-shadow:
@@ -331,6 +331,28 @@ td:last-child {
         0 0 10px rgba(138,180,248,0.5),
         0 0 20px rgba(138,180,248,0.2);
     transform: translateY(-5px);
+}
+
+.skills-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.skill-category {
+    width: 220px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.skill-category h3 {
+    margin-bottom: 8px;
+}
+
+.skill-category ul {
+    padding-left: 18px;
 }
 
 .contact-icons {
