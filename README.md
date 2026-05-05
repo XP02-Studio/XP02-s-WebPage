@@ -1,2 +1,2 @@
-made my own site repo, now it needs features and more to continue.
-Added Portfolio, with decent data about myself.
+Hosted my portfolio. Added almost everything
+https://xp02-studio.github.io/XP02-s-WebPage/
