@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XP02's Ascii Generator</title>
+    <link rel="stylesheet" href="ascii_style.css">
+</head>
+<body>
+    <h1>Welcome to XP02's</h1>
+    <h2>ASCII Art Generator</h2>
+    <div class="controls">
+        <div class="form-group">
+            <label>Select Image:</label>
+            <input type="file" id="imageInput" accept="image/*">
+        </div>
+        <div class="form-group">
+            <label>Width (Resolution):</label>
+            <input type="number" id="widthInput" value="120" min="50" max="1080">
+        </div>
+        <div class="form-group">
+            <label>Viewing Theme:</label>
+            <select id="themeSelect">
+                <option value="dark">Dark Mode</option>
+                <option value="light">Light Mode</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Enable Colors:</label>
+            <input type="checkbox" id="colorToggle" checked>
+        </div>
+        <div class="btn-container">
+            <button onclick="generateArt()">GENERATE ART</button>
+        </div>
+    </div>
+    <div id="ascii-output"></div>
+</body>
+<script src="ascii_script.js"></script>
+</html>
