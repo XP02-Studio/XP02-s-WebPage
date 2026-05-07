@@ -39,6 +39,12 @@ body {
     border-radius: 6px;
 }
 
+@media (max-width: 600px) {
+    .pdf-view {
+        height: 350px;
+    }
+}
+
 h3{
     font-family: 'MyFonts',sans-serif;
     font-style: normal;
