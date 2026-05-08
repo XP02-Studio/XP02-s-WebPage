@@ -1,4 +1,4 @@
-/* Background: #121212
+/* /* Background: #121212
 Text: #ffffff
 Secondary text: #b0b0b0
 Accent: #8ab4f8
@@ -62,20 +62,20 @@ p {
 
 .mainmenusec {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+    max-width: 800px;
 }
 
 .mainmenusec a {
     text-decoration: none;
     color: #ffffff;
-
     padding: 12px 24px;
     border: 1px solid rgba(255,255,255,0.2);
     border-radius: 8px;
-
     background: #1e1e1e;
-
     transition: 0.3s;
+    min-width: 120px;
 }
 
 .mainmenusec a:hover {
