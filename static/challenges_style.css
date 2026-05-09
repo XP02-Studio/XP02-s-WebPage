@@ -34,7 +34,6 @@ h1{
         0 0 24px rgba(138, 180, 248, 0.2);
 }
 
-/* Layout Container */
 .settings-container {
     display: flex;
     width: 800px;
@@ -49,12 +48,10 @@ h1{
         0 0 24px rgba(138, 180, 248, 0.2);
 }
 
-/* Hide the actual radio buttons */
 input[type="radio"] {
     display: none;
 }
 
-/* Sidebar Styling */
 .sidebar {
     width: 200px;
     background: #121212;
@@ -78,7 +75,6 @@ input[type="radio"] {
     background: rgba(255,255,255,0.05);
 }
 
-/* Content Area Styling */
 .content {
     flex: 1;
     padding: 30px;
@@ -86,7 +82,7 @@ input[type="radio"] {
 }
 
 .tab-panel {
-    display: none; /* Hide all panels by default */
+    display: none;
 }
 
 /* --- THE LOGIC --- */

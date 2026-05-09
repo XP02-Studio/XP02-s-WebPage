@@ -115,6 +115,11 @@ summary {
     margin-bottom: 10px;
 }
 
+summary::-webkit-details-marker {
+  display: none;
+}
+
+
 details p {
     font-size: 14px;
     color: #b0b0b0;
