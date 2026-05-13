@@ -26,7 +26,9 @@
             <div id="clicks-panel" class="tab-panel">
                 <h2>Clicks Counter</h2><hr>
                 <p>This website counts the number of clicks happened</p>
-                <p>comming soon...</p>
+                <p>You have clicked or interacted with this site <span id="interaction-counter" style="font-weight: bold; color: blue;">0</span> times!</p>
+                    <!-- The Reset Button (Can be placed anywhere) -->
+                <button id="reset-btn" style="margin-top: 20px;">Reset Stats</button>
             </div>
             <div id="explorer-panel" class="tab-panel">
                 <h2>Explorer Quest</h2><hr>
@@ -39,5 +41,13 @@
             </div>
         </div>
     </div>
+        <!-- Permission Banner (Hidden by default) -->
+    <div id="cookie-banner" class="permissionmenu">
+        <p>Do you want to track your fun interaction stats? (Stored locally)</p>
+        <a href="permission.html">Details</a>
+        <button id="accept-btn">Yes, let's play!</button>
+        <button id="reject-btn">No thanks</button>
+    </div>
 </body>
+    <script src="../script/script.js"></script>
 </html>

@@ -108,3 +108,15 @@ input[type="radio"] {
     to { opacity: 1; transform: translateX(0); }
 }
 
+.permissionmenu{
+    display:none;
+    position:fixed; 
+    bottom:20px; 
+    left:20px; 
+    background:#333; 
+    color:#fff; 
+    padding:20px; 
+    border-radius:10px;
+    z-index:1000;
+}
+
