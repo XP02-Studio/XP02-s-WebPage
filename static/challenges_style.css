@@ -89,6 +89,7 @@ input[type="radio"] {
 
 /* When a radio is checked, find its matching label and highlight it */
 #tab-clicks:checked ~ .sidebar .tab-label[for="tab-clicks"],
+#tab-views:checked ~ .sidebar .tab-label[for="tab-views"],
 #tab-explorer:checked ~ .sidebar .tab-label[for="tab-explorer"],
 #tab-easter:checked ~ .sidebar .tab-label[for="tab-easter"] {
     color: #8ab4f8;
@@ -97,6 +98,7 @@ input[type="radio"] {
 
 /* When a radio is checked, find the specific panel and show it */
 #tab-clicks:checked ~ .content #clicks-panel,
+#tab-views:checked ~ .content #views-panel,
 #tab-explorer:checked ~ .content #explorer-panel,
 #tab-easter:checked ~ .content #easter-panel {
     display: block;
