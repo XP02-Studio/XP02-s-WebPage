@@ -12,10 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (permission === null) {
         banner.style.display = 'block';
     }
+    let lastClickTime = 0;
 
     // 3. Logic to update the count
-    const updateCount = () => {
+    const updateCount = (event) => {
         if (localStorage.getItem('stats_permission') === 'true') {
+            
+            // --- FIX: Prevent double counting on tabs/radio buttons ---
+            const currentTime = Date.now();
+            if (currentTime - lastClickTime < 50) { 
+                return; // If another click happens within 50ms, ignore it!
+            }
+            lastClickTime = currentTime;
+            // ---------------------------------------------------------
+
             let count = parseInt(localStorage.getItem('global_interactions')) || 0;
             count++;
             localStorage.setItem('global_interactions', count);
