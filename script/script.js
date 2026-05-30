@@ -1,3 +1,75 @@
+// document.addEventListener('DOMContentLoaded', () => {
+//     const banner = document.getElementById('cookie-banner');
+//     const acceptBtn = document.getElementById('accept-btn');
+//     const rejectBtn = document.getElementById('reject-btn');
+//     const resetBtn = document.getElementById('reset-btn');
+//     const displayEl = document.getElementById('interaction-counter');
+
+//     // 1. Check if user has already given permission
+//     let permission = localStorage.getItem('stats_permission'); // 'true', 'false', or null
+
+//     // 2. Show banner if no choice has been made
+//     if (permission === null) {
+//         if (banner) banner.style.display = 'block';
+//     }
+//     let lastClickTime = 0;
+
+//     // 3. Logic to update the count
+//     const updateCount = (event) => {
+//         if (localStorage.getItem('stats_permission') === 'true') {
+            
+//             // --- FIX: Prevent double counting on tabs/radio buttons ---
+//             const currentTime = Date.now();
+//             if (currentTime - lastClickTime < 50) { 
+//                 return; // If another click happens within 50ms, ignore it!
+//             }
+//             lastClickTime = currentTime;
+//             // ---------------------------------------------------------
+
+//             let count = parseInt(localStorage.getItem('global_interactions')) || 0;
+//             count++;
+//             localStorage.setItem('global_interactions', count);
+//             if (displayEl) displayEl.textContent = count.toLocaleString();
+//         }
+//     };
+
+//     // 4. Permission Button Listeners
+//     if (acceptBtn) {
+//         acceptBtn.addEventListener('click', () => {
+//             localStorage.setItem('stats_permission', 'true');
+//             if (banner) banner.style.display = 'none';
+//             // Initialize UI after accepting
+//             if (displayEl) displayEl.textContent = (localStorage.getItem('global_interactions') || 0);
+//         });
+//     }
+
+//     if (rejectBtn) {
+//         rejectBtn.addEventListener('click', () => {
+//             localStorage.setItem('stats_permission', 'false');
+//             if (banner) banner.style.display = 'none';
+//         });
+//     }
+
+//     // 5. Reset Button Listener
+//     if (resetBtn) {
+//         resetBtn.addEventListener('click', () => {
+//             localStorage.setItem('global_interactions', -1); 
+//             if (displayEl) displayEl.textContent = "0";
+//             alert("Stats have been reset to 0!");
+//         });
+//     }
+
+//     // 6. Global Click Listener
+//     window.addEventListener('click', updateCount);
+
+//     // Initial UI Sync
+//     if (displayEl && localStorage.getItem('stats_permission') === 'true') {
+//         displayEl.textContent = (localStorage.getItem('global_interactions') || 0);
+//     }
+// });
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const banner = document.getElementById('cookie-banner');
     const acceptBtn = document.getElementById('accept-btn');
@@ -6,39 +78,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayEl = document.getElementById('interaction-counter');
 
     // 1. Check if user has already given permission
-    let permission = localStorage.getItem('stats_permission'); // 'true', 'false', or null
+    let permission = localStorage.getItem('stats_permission'); 
 
-    // 2. Show banner if no choice has been made
-    if (permission === null) {
-        if (banner) banner.style.display = 'block';
+    // 2. Only try to show the banner if it physically exists on this page
+    if (permission === null && banner) {
+        banner.style.display = 'block';
     }
     let lastClickTime = 0;
 
     // 3. Logic to update the count
     const updateCount = (event) => {
         if (localStorage.getItem('stats_permission') === 'true') {
-            
-            // --- FIX: Prevent double counting on tabs/radio buttons ---
             const currentTime = Date.now();
-            if (currentTime - lastClickTime < 50) { 
-                return; // If another click happens within 50ms, ignore it!
-            }
+            if (currentTime - lastClickTime < 50) return; 
             lastClickTime = currentTime;
-            // ---------------------------------------------------------
 
             let count = parseInt(localStorage.getItem('global_interactions')) || 0;
             count++;
             localStorage.setItem('global_interactions', count);
+            
+            // Safety Guard: Only update text if the counter element exists on this page
             if (displayEl) displayEl.textContent = count.toLocaleString();
         }
     };
 
-    // 4. Permission Button Listeners
+    // 4. Permission Button Listeners (Added Safety Guards)
     if (acceptBtn) {
         acceptBtn.addEventListener('click', () => {
             localStorage.setItem('stats_permission', 'true');
             if (banner) banner.style.display = 'none';
-            // Initialize UI after accepting
             if (displayEl) displayEl.textContent = (localStorage.getItem('global_interactions') || 0);
         });
     }
@@ -50,10 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Reset Button Listener
+    // 5. Reset Button Listener (Added Safety Guard)
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
-            localStorage.setItem('global_interactions', -1); 
+            localStorage.setItem('global_interactions', 0); 
             if (displayEl) displayEl.textContent = "0";
             alert("Stats have been reset to 0!");
         });
@@ -62,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. Global Click Listener
     window.addEventListener('click', updateCount);
 
-    // Initial UI Sync
+    // Initial UI Sync (Added Safety Guard)
     if (displayEl && localStorage.getItem('stats_permission') === 'true') {
         displayEl.textContent = (localStorage.getItem('global_interactions') || 0);
     }
