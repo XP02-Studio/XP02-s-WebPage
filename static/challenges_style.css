@@ -122,3 +122,18 @@ input[type="radio"] {
     z-index:1000;
 }
 
+/* The stage for our random characters */
+.random-character-stage {
+    position: fixed;
+    z-index: 9999; /* Make sure it stays on top of everything */
+    pointer-events: none; /* Prevents the asset from blocking clicks on your site */
+    display: none;
+    transition: all 0.5s ease-in-out;
+}
+
+/* Base styling for the asset inside */
+.random-character-stage img, 
+.random-character-stage video {
+    width: 150px; /* Adjust size based on your artwork */
+    height: auto;
+}
