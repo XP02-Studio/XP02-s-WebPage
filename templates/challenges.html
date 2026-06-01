@@ -7,11 +7,15 @@
     <link rel="stylesheet" href="../static/challenges_style.css">
 </head>
 <body>
-    <h1>Challenges</h1>
+    <div class="backbutton">
+        <a href="../index.html">Back</a>
+    </div>
+    <h1 class="heading">Challenges</h1>
     <div class="settings-container">
         <!-- Hidden Radios to track state -->
         <input type="radio" name="tabs" id="tab-clicks" checked>
         <input type="radio" name="tabs" id="tab-views">
+        <input type="radio" name="tabs" id="tab-anim">
         <input type="radio" name="tabs" id="tab-explorer">
         <input type="radio" name="tabs" id="tab-easter">
 
@@ -19,6 +23,7 @@
         <div class="sidebar">
             <label for="tab-clicks" class="tab-label">Clicks</label>
             <label for="tab-views" class="tab-label">Views</label>
+            <label for="tab-anim" class="tab-label">Animations</label>
             <label for="tab-explorer" class="tab-label">Explorer</label>
             <label for="tab-easter" class="tab-label">Easter Egg</label>
         </div>
@@ -36,6 +41,11 @@
                 <p>Total New Viewers: <span id="viewers-counter">0</span></p> -->
                 <!-- i will add a refer link here -->
                 <p>Coming Soon..</p>
+            </div>
+            <div id="anim-panel" class="tab-panel">
+                <h2>On Screen Animations</h2><hr>
+                <p>If Enabled Random animations will play on screen</p>
+                <button id="anim-toggle" style="background-color: blue; color:white; border-radius: 2px;">Enable</button>
             </div>
             <div id="explorer-panel" class="tab-panel">
                 <h2>Explorer Quest</h2><hr>

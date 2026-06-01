@@ -39,6 +39,28 @@ body {
     text-align: center;
 }
 
+.backbutton{
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.backbutton a {
+    margin: 10px;
+    padding: 10px;
+    background-color: blue;
+    border: 2px solid black;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.backbutton:hover {
+    transform: translateY(5px);
+}
+
+
 header {
     font-size: 40px;
     margin-bottom: 10px;

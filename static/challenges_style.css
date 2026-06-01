@@ -26,6 +26,27 @@ body {
     text-align: center;
 }
 
+.backbutton{
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.backbutton a {
+    margin: 10px;
+    padding: 10px;
+    background-color: blue;
+    border: 2px solid black;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.backbutton:hover {
+    transform: translateY(5px);
+}
+
 h1{
     font-size:40px ;
     text-shadow:         
@@ -90,6 +111,7 @@ input[type="radio"] {
 /* When a radio is checked, find its matching label and highlight it */
 #tab-clicks:checked ~ .sidebar .tab-label[for="tab-clicks"],
 #tab-views:checked ~ .sidebar .tab-label[for="tab-views"],
+#tab-anim:checked ~ .sidebar .tab-label[for="tab-anim"]
 #tab-explorer:checked ~ .sidebar .tab-label[for="tab-explorer"],
 #tab-easter:checked ~ .sidebar .tab-label[for="tab-easter"] {
     color: #8ab4f8;
@@ -99,6 +121,7 @@ input[type="radio"] {
 /* When a radio is checked, find the specific panel and show it */
 #tab-clicks:checked ~ .content #clicks-panel,
 #tab-views:checked ~ .content #views-panel,
+#tab-anim:checked ~ .content #anim-panel,
 #tab-explorer:checked ~ .content #explorer-panel,
 #tab-easter:checked ~ .content #easter-panel {
     display: block;

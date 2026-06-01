@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const rejectBtn = document.getElementById('reject-btn');
     const resetBtn = document.getElementById('reset-btn');
     const displayEl = document.getElementById('interaction-counter');
+    const toggleAnimBtn = document.getElementById('anim-toggle');
 
     // 1. Check if user has already given permission
     let permission = localStorage.getItem('stats_permission'); 
@@ -61,6 +62,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial UI Sync (Added Safety Guard)
     if (displayEl && localStorage.getItem('stats_permission') === 'true') {
         displayEl.textContent = (localStorage.getItem('global_interactions') || 0);
+    }
+
+    if (toggleAnimBtn) {
+        // Initialize the button copy text based on storage state
+        const isEnabled = localStorage.getItem('animations_enabled') !== 'false';
+        toggleAnimBtn.textContent = isEnabled ? "Disable Animations" : "Enable Animations";
+
+        toggleAnimBtn.addEventListener('click', () => {
+            const currentSetting = localStorage.getItem('animations_enabled') !== 'false';
+            const newSetting = !currentSetting;
+            
+            localStorage.setItem('animations_enabled', newSetting);
+            toggleAnimBtn.textContent = newSetting ? "Disable Animations" : "Enable Animations";
+
+            // If they turned it back on manually, instantly restart the generator loop safely
+            if (newSetting) {
+                console.log("Animations enabled. Engine starting...");
+                queueNextAnimation();
+            }
+            console.log("Saving changes and refreshing page...");
+            location.reload();
+        });
     }
 });
 
