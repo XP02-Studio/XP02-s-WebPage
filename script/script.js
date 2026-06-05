@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetBtn = document.getElementById('reset-btn');
     const displayEl = document.getElementById('interaction-counter');
     const toggleAnimBtn = document.getElementById('anim-toggle');
+    const viewDisplayEl = document.getElementById('view-counter'); 
+
+    // --- TECHNIQUE 1: PRIVATE CLOSURE STATE ENGINE ---
+    let _totalViews = parseInt(localStorage.getItem('global_page_views')) || 0;
 
     // 1. Check if user has already given permission
     let permission = localStorage.getItem('stats_permission'); 
@@ -15,7 +19,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     let lastClickTime = 0;
 
-    // 3. Logic to update the count
+    // --- FIXED: Unique Visitor-Guarded View Tracker ---
+    const incrementPageView = () => {
+        if (localStorage.getItem('stats_permission') === 'true') {
+            // Check if this browser has been flagged as a returning user
+            const isReturningUser = localStorage.getItem('returning_visitor') === 'true';
+
+            if (!isReturningUser) {
+                _totalViews++; 
+                localStorage.setItem('global_page_views', _totalViews);
+                // Permanent flag: This browser is no longer a "new person"
+                localStorage.setItem('returning_visitor', 'true');
+            }
+
+            // Always render the verified global total directly to the display element
+            if (viewDisplayEl) {
+                viewDisplayEl.textContent = _totalViews.toLocaleString();
+            }
+        }
+    };
+
+    // 3. Logic to update the interaction count
     const updateCount = (event) => {
         if (localStorage.getItem('stats_permission') === 'true') {
             const currentTime = Date.now();
@@ -26,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
             count++;
             localStorage.setItem('global_interactions', count);
             
-            // Safety Guard: Only update text if the counter element exists on this page
             if (displayEl) displayEl.textContent = count.toLocaleString();
         }
     };
@@ -37,6 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('stats_permission', 'true');
             if (banner) banner.style.display = 'none';
             if (displayEl) displayEl.textContent = (localStorage.getItem('global_interactions') || 0);
+            
+            // Process view check immediately upon tracking confirmation
+            incrementPageView();
         });
     }
 
@@ -50,22 +76,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Reset Button Listener
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
-            localStorage.setItem('global_interactions', -1); 
+            localStorage.setItem('global_interactions', 0); 
+            localStorage.setItem('global_page_views', 0);
+            localStorage.removeItem('returning_visitor'); // Clear the unique user token
+            _totalViews = 0; 
             if (displayEl) displayEl.textContent = "0";
-            alert("Stats have been reset to 0!");
+            if (viewDisplayEl) viewDisplayEl.textContent = "0";
+            alert("All global stats, unique visitor tokens, and views have been reset to 0!");
         });
     }
 
     // 6. Global Click Listener
     window.addEventListener('click', updateCount);
 
-    // Initial UI Sync (Added Safety Guard)
-    if (displayEl && localStorage.getItem('stats_permission') === 'true') {
-        displayEl.textContent = (localStorage.getItem('global_interactions') || 0);
+    // Initial UI Sync & View Run Execution
+    if (localStorage.getItem('stats_permission') === 'true') {
+        incrementPageView(); 
+        if (displayEl) displayEl.textContent = (localStorage.getItem('global_interactions') || 0).toLocaleString();
     }
 
     if (toggleAnimBtn) {
-        // Initialize the button copy text based on storage state
         const isEnabled = localStorage.getItem('animations_enabled') !== 'false';
         toggleAnimBtn.textContent = isEnabled ? "Disable Animations" : "Enable Animations";
 
@@ -76,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('animations_enabled', newSetting);
             toggleAnimBtn.textContent = newSetting ? "Disable Animations" : "Enable Animations";
 
-            // If they turned it back on manually, instantly restart the generator loop safely
             if (newSetting) {
                 console.log("Animations enabled. Engine starting...");
                 queueNextAnimation();
@@ -89,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- FEATURE: RANDOM CHARACTER ANIMATION ENGINE ---
 
-// 1. Array of animations where each character handles its own coordinates and timing details
 const characterAnimations = [
     { 
         name: 'cat',
@@ -98,7 +126,6 @@ const characterAnimations = [
         width: '130px', 
         height: '130px', 
         duration: 4800,
-        // Drops up from the bottom edge, settles in the bottom-left area
         start: { bottom: '-160px', left: '50px', top: 'auto', right: 'auto' },
         show: { bottom: '0px' }
     },
@@ -109,7 +136,6 @@ const characterAnimations = [
         width: '200px', 
         height: '200px', 
         duration: 2700,
-        // Slides left out of the right side, settles in the bottom-right area
         start: { right: '-230px', bottom: '50px', top: 'auto', left: 'auto' },
         show: { right: '0px' }
     },
@@ -120,7 +146,6 @@ const characterAnimations = [
         width: '100px', 
         height: '400px', 
         duration: 2700,
-        // Drops down from the ceiling, settles in the top-left area
         start: { top: '-280px', left: '40px', bottom: 'auto', right: 'auto' },
         show: { top: '0px' }
     }
@@ -130,48 +155,39 @@ const triggerRandomAnimation = () => {
     const stage = document.getElementById('character-stage');
     if (!stage) return;
 
-    // Pick a completely random animation configuration from our list
+    if (localStorage.getItem('animations_enabled') === 'false') return;
+
     const randomAnim = characterAnimations[Math.floor(Math.random() * characterAnimations.length)];
 
-    // Inject asset with dynamic dimensions matching the config
     if (randomAnim.type === 'image') {
         stage.innerHTML = `<img src="${randomAnim.src}" style="width: ${randomAnim.width}; height: ${randomAnim.height}; display: block;" alt="random-anim">`;
     }
 
-    // Reset styles and apply the specific off-screen hidden starting coordinates
     stage.style.display = 'block';
     Object.assign(stage.style, {
         top: 'auto', bottom: 'auto', left: 'auto', right: 'auto',
         ...randomAnim.start
     });
 
-    // Step 1: Slide into view using the custom show placement rules
     setTimeout(() => {
         Object.assign(stage.style, randomAnim.show);
     }, 100);
 
-    // Step 2: Leave it on screen based on character's specific duration attribute
     setTimeout(() => {
-        // Slide back out to its original starting hide location
         Object.assign(stage.style, randomAnim.start);
         
-        // Step 3: Completely clear HTML structures after sliding out transitions finish
         setTimeout(() => {
             stage.style.display = 'none';
             stage.innerHTML = '';
-            
-            // Queue up the next random encounter
             queueNextAnimation();
         }, 500);
     }, randomAnim.duration);
 };
 
-// Expose to window scope so you can run triggerRandomAnimation() in your DevTools Console
 window.triggerRandomAnimation = triggerRandomAnimation;
 
-// 4. Timer Engine: Controls the delay intervals natively
 const queueNextAnimation = () => {
-    // Generate a random time between 8-18 sec
+    if (localStorage.getItem('animations_enabled') === 'false') return;
     const randomDelay = Math.floor(Math.random() * (18000 - 8000 + 1)) + 8000;
     
     setTimeout(() => {
@@ -179,5 +195,6 @@ const queueNextAnimation = () => {
     }, randomDelay);
 };
 
-// 5. Fire off the very first sequence cycle after the user loads the page (5 seconds delay)
-setTimeout(queueNextAnimation, 5000);
+if (localStorage.getItem('animations_enabled') !== 'false') {
+    setTimeout(queueNextAnimation, 5000);
+}
