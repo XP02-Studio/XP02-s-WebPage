@@ -14,7 +14,6 @@
     <div class="settings-container">
         <!-- Hidden Radios to track state -->
         <input type="radio" name="tabs" id="tab-clicks" checked>
-        <input type="radio" name="tabs" id="tab-views">
         <input type="radio" name="tabs" id="tab-anim">
         <input type="radio" name="tabs" id="tab-explorer">
         <input type="radio" name="tabs" id="tab-easter">
@@ -22,7 +21,6 @@
         <!-- Sidebar Labels -->
         <div class="sidebar">
             <label for="tab-clicks" class="tab-label">Clicks</label>
-            <label for="tab-views" class="tab-label">Views</label>
             <label for="tab-anim" class="tab-label">Animations</label>
             <label for="tab-explorer" class="tab-label">Explorer</label>
             <label for="tab-easter" class="tab-label">Easter Egg</label>
@@ -35,10 +33,6 @@
                 <p>This website counts the number of clicks happened</p>
                 <p>You have clicked or interacted with this site <span id="interaction-counter" style="font-weight: bold; color: blue;">0</span> times!</p>
                 <button id="reset-btn" style="background-color: rgb(222, 15, 15); color: white; border-radius: 2px;">Reset Stats</button>
-            </div>
-            <div id="views-panel" class="tab-panel">
-                <h2>Total Views</h2><hr>
-                <p>Total Views: <span id="view-counter">0</span></p>
             </div>
             <div id="anim-panel" class="tab-panel">
                 <h2>On Screen Animations</h2><hr>

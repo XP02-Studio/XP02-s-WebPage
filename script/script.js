@@ -5,10 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetBtn = document.getElementById('reset-btn');
     const displayEl = document.getElementById('interaction-counter');
     const toggleAnimBtn = document.getElementById('anim-toggle');
-    const viewDisplayEl = document.getElementById('view-counter'); 
-
-    // --- TECHNIQUE 1: PRIVATE CLOSURE STATE ENGINE ---
-    let _totalViews = parseInt(localStorage.getItem('global_page_views')) || 0;
 
     // 1. Check if user has already given permission
     let permission = localStorage.getItem('stats_permission'); 
@@ -18,26 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         banner.style.display = 'block';
     }
     let lastClickTime = 0;
-
-    // --- FIXED: Unique Visitor-Guarded View Tracker ---
-    const incrementPageView = () => {
-        if (localStorage.getItem('stats_permission') === 'true') {
-            // Check if this browser has been flagged as a returning user
-            const isReturningUser = localStorage.getItem('returning_visitor') === 'true';
-
-            if (!isReturningUser) {
-                _totalViews++; 
-                localStorage.setItem('global_page_views', _totalViews);
-                // Permanent flag: This browser is no longer a "new person"
-                localStorage.setItem('returning_visitor', 'true');
-            }
-
-            // Always render the verified global total directly to the display element
-            if (viewDisplayEl) {
-                viewDisplayEl.textContent = _totalViews.toLocaleString();
-            }
-        }
-    };
 
     // 3. Logic to update the interaction count
     const updateCount = (event) => {
@@ -54,15 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // 4. Permission Button Listeners (Added Safety Guards)
+    // 4. Permission Button Listeners (With Safety Guards)
     if (acceptBtn) {
         acceptBtn.addEventListener('click', () => {
             localStorage.setItem('stats_permission', 'true');
             if (banner) banner.style.display = 'none';
             if (displayEl) displayEl.textContent = (localStorage.getItem('global_interactions') || 0);
-            
-            // Process view check immediately upon tracking confirmation
-            incrementPageView();
         });
     }
 
@@ -77,24 +50,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
             localStorage.setItem('global_interactions', 0); 
-            localStorage.setItem('global_page_views', 0);
-            localStorage.removeItem('returning_visitor'); // Clear the unique user token
-            _totalViews = 0; 
             if (displayEl) displayEl.textContent = "0";
-            if (viewDisplayEl) viewDisplayEl.textContent = "0";
-            alert("All global stats, unique visitor tokens, and views have been reset to 0!");
+            alert("Global interaction stats have been reset to 0!");
         });
     }
 
     // 6. Global Click Listener
     window.addEventListener('click', updateCount);
 
-    // Initial UI Sync & View Run Execution
+    // Initial UI Sync
     if (localStorage.getItem('stats_permission') === 'true') {
-        incrementPageView(); 
         if (displayEl) displayEl.textContent = (localStorage.getItem('global_interactions') || 0).toLocaleString();
     }
 
+    // Toggle Animation Interface Button Handler
     if (toggleAnimBtn) {
         const isEnabled = localStorage.getItem('animations_enabled') !== 'false';
         toggleAnimBtn.textContent = isEnabled ? "Disable Animations" : "Enable Animations";
@@ -121,9 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
 const characterAnimations = [
     { 
         name: 'cat',
-        src: '../assets/anim/cat(1)_gif.gif', 
-        type: 'image', 
-        width: '130px', 
+        src: '../assets/anim/cat(1)_gif.gif',
+        type: 'image',
+        width: '130px',
         height: '130px', 
         duration: 4800,
         start: { bottom: '-160px', left: '50px', top: 'auto', right: 'auto' },
@@ -132,11 +101,11 @@ const characterAnimations = [
     { 
         name: 'greeting',
         src: '../assets/anim/greeting_gif.gif', 
-        type: 'image', 
+        type: 'image',
         width: '200px', 
         height: '200px', 
         duration: 2700,
-        start: { right: '-230px', bottom: '50px', top: 'auto', left: 'auto' },
+        start: { right: '-200px', bottom: '10px', top: 'auto', left: 'auto' },
         show: { right: '0px' }
     },
     { 
