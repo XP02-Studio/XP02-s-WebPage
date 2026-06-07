@@ -1,0 +1,243 @@
+
+@font-face {
+    font-family: 'MyFonts';
+    src: url('../assets/Fonts/heading.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MyFonts';
+    src: url('../assets/Fonts/paragraph.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+body {
+    margin: 0;
+    font-family: 'MyFonts', sans-serif;
+    background: #121212;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.backbutton{
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.backbutton a {
+    margin: 10px;
+    padding: 10px;
+    background-color: blue;
+    border: 2px solid black;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.backbutton:hover {
+    transform: translateY(5px);
+}
+
+h1{
+    font-size:40px ;
+    text-shadow:         
+        0 0 8px rgba(138, 180, 248, 0.6),
+        0 0 16px rgba(138, 180, 248, 0.4),
+        0 0 24px rgba(138, 180, 248, 0.2);
+}
+
+
+/* --- COMPONENT: VERTICAL GAMES DASHBOARD --- */
+.hub-container {
+    width: 100%;
+    max-width: 750px;
+    margin: 80px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.hub-header {
+    margin-bottom: 40px;
+}
+
+.hub-header p {
+    color: #a0a0a0;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.games-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Space between rows */
+}
+
+/* Base Expanded Row Look */
+.game-item-row {
+    display: flex;
+    align-items: center;
+    background: #1e1e1e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    text-align: left;
+}
+
+/* Hover effects for active rows */
+.game-item-row:not(.locked):hover {
+    background: #252525;
+    border-color: #8ab4f8;
+    transform: translateX(4px);
+}
+
+/* Icon Frame container */
+.game-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background: #121212;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-right: 20px;
+    flex-shrink: 0; /* Prevents icon from squishing on tiny phones */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Text Meta Blocks */
+.game-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.game-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.game-desc {
+    font-size: 14px;
+    color: #a0a0a0;
+    line-height: 1.4;
+}
+
+/* Status Labels */
+.game-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 15px;
+}
+
+.status-live {
+    background: rgba(138, 180, 248, 0.15);
+    color: #8ab4f8;
+    border: 1px solid rgba(138, 180, 248, 0.3);
+}
+
+.status-upcoming {
+    background: rgba(255, 255, 255, 0.05);
+    color: #707070;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Locked State Modification */
+.game-item-row.locked {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* --- COMPONENT: STATIC REFLEX TEST GAME --- */
+.game-card {
+    max-width: 550px;
+    margin: 40px auto;
+    padding: 24px;
+    background: #1e1e1e;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.game-header h3 {
+    color: #ffffff;
+    margin: 0 0 6px 0;
+    font-size: 20px;
+}
+
+.game-header p {
+    color: #a0a0a0;
+    font-size: 14px;
+    margin: 0 0 20px 0;
+    line-height: 1.4;
+}
+
+#reaction-pad {
+    width: 100%;
+    height: 220px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.1s ease, transform 0.1s ease;
+}
+
+#reaction-pad:active {
+    transform: scale(0.99);
+}
+
+/* State Management Flavors */
+.pad-idle { 
+    background: #252525; 
+    border: 2px dashed rgba(255, 255, 255, 0.15); 
+}
+.pad-idle:hover {
+    background: #2c2c2c;
+}
+.pad-waiting { 
+    background: #b91c1c; /* Sharp Warning Red */
+    border: 2px solid transparent;
+}
+.pad-triggered { 
+    background: #16a34a; /* Electric Green */
+    color: #0f172a;
+    border: 2px solid transparent;
+}
+
+.game-stats-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+#reaction-current { color: #94a3b8; }
+#reaction-best { color: #8ab4f8;}
