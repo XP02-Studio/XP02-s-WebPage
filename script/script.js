@@ -104,9 +104,19 @@ const characterAnimations = [
         type: 'image',
         width: '200px', 
         height: '200px', 
-        duration: 2700,
-        start: { right: '-200px', bottom: '10px', top: 'auto', left: 'auto' },
+        duration: 2000,
+        start: { right: '-220px', bottom: '10px', top: 'auto', left: 'auto' },
         show: { right: '0px' }
+    },
+    { 
+        name: 'sneakpeak',
+        src: '../assets/anim/sneakpeak_gif.gif', 
+        type: 'image',
+        width: '200px', 
+        height: '200px', 
+        duration: 3300,
+        start: { top: '10px', left: '-220px', right: 'auto', bottom: 'auto' },
+        show: { left: '10px' }
     },
     { 
         name: 'spiderman',
@@ -128,28 +138,39 @@ const triggerRandomAnimation = () => {
 
     const randomAnim = characterAnimations[Math.floor(Math.random() * characterAnimations.length)];
 
-    if (randomAnim.type === 'image') {
-        stage.innerHTML = `<img src="${randomAnim.src}" style="width: ${randomAnim.width}; height: ${randomAnim.height}; display: block;" alt="random-anim">`;
-    }
+    // 1. Force a strict cache reset using a new timestamp unique ID
+    const cacheBuster = `?t=${Date.now()}`;
 
+    // 2. Inject a completely clean image element string into the container stage
+    stage.innerHTML = `
+        <img 
+            src="${randomAnim.src}${cacheBuster}" 
+            style="width: ${randomAnim.width}; height: ${randomAnim.height}; display: block;" 
+            alt="random-anim">
+    `;
+
+    // 3. Make the animation stage panel visible
     stage.style.display = 'block';
     Object.assign(stage.style, {
         top: 'auto', bottom: 'auto', left: 'auto', right: 'auto',
         ...randomAnim.start
     });
 
+    // 4. Slide the element into view frame properties
     setTimeout(() => {
         Object.assign(stage.style, randomAnim.show);
     }, 100);
 
+    // 5. Hide the element after its duration runs out
     setTimeout(() => {
         Object.assign(stage.style, randomAnim.start);
         
+        // 6. CRITICAL: Completely delete the element image from memory
         setTimeout(() => {
             stage.style.display = 'none';
-            stage.innerHTML = '';
+            stage.innerHTML = ''; // This completely destroys the image element so it can't loop in the background!
             queueNextAnimation();
-        }, 500);
+        }, 500); // Wait for the exit slide animation to finish
     }, randomAnim.duration);
 };
 
