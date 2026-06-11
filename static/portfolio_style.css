@@ -385,50 +385,99 @@ td:last-child {
     transform: translateY(-3px);
 }
 
+/* ==========================================
+   FOOTER & PARTY MEMBERS SECTION
+   ========================================== */
 footer {
     display: flex;
     flex-direction: column;
-    background: #121212;
-    color: white;
+    background: #0d0d0d; /* Slate pitch dark for the bottom section */
+    color: var(--text-main);
     justify-content: center;
     align-items: center;
-    opacity: 0.6;
+    padding: 30px 20px; /* Snug top/bottom spacing to maintain the tight vertical rhythm */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.favcontacts{
+footer h3 {
+    border: none;
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Individual rows for each party member */
+.favcontacts {
     display: flex;
-    gap: 15px;
-    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 320px;
+    margin: 6px 0; /* Tight row gaps */
 }
 
-.favcontacts p{
-    margin-top: 5px;
+.favcontacts p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
+/* Flex container holding GitHub and LinkedIn anchors together */
+.favcontacts .links-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* Rounded, tactical HUD-style social links */
 .favcontacts a {
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #1e1e1e;
-    border: 1px solid rgba(255,255,255,0.2);
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    color: #8ab4f8;
-    font-size: 20px;
-    transition: 0.3s;
+    color: var(--text-main);
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
+/* Solid white core selection state with refined deep blue shadow backdrop */
 .favcontacts a:hover {
-    color: #ffffff;
-    border-color: #8ab4f8;
+    color: var(--glow-white);
+    border-color: var(--glow-white);
     box-shadow:
-        0 0 10px rgba(138,180,248,0.6),
-        0 0 20px rgba(138,180,248,0.3);
+        0 0 5px var(--glow-white),
+        0 0 15px var(--glow-blue);
     transform: translateY(-3px);
 }
 
+/* ==========================================
+   MOBILE COMPATIBILITY (CROSS-PLATFORM RULES)
+   ========================================== */
+@media (max-width: 768px) {
+    footer {
+        padding: 25px 15px;
+    }
 
+    /* Stacks character name over their links smoothly on Android screens */
+    .favcontacts {
+        flex-direction: column;
+        gap: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 12px;
+        margin: 8px 0;
+    }
+    
+    .favcontacts:last-of-type {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+}
 /* The stage for our random characters */
 .random-character-stage {
     position: fixed;
