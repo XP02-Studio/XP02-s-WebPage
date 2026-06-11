@@ -11,7 +11,7 @@ Card BG:         #2a2a2a
 Text Main:       #ffffff
 Text Secondary:  #b0b0b0
 Accent:          #c792ea (optional purple touch) */
-
+/* 
 @font-face {
     font-family: 'MyFonts';
     src: url('../assets/Fonts/heading.ttf') format('truetype');
@@ -163,4 +163,274 @@ details a {
     padding:20px; 
     border-radius:10px;
     z-index:1000;
+} */
+
+
+/* ==========================================
+   FONTS & VARIABLES
+   ========================================== */
+@font-face {
+    font-family: 'MyFonts';
+    src: url('../assets/Fonts/heading.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MyFonts';
+    src: url('../assets/Fonts/paragraph.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+:root {
+    --bg-dark: #121212;
+    --card-bg: #1e1e1e;
+    --text-main: #ffffff;
+    --text-muted: #b0b0b0;
+    
+    /* Color Palette: Shifted from cold electric blue to a deeper, warmer royal cobalt */
+    --glow-blue: #1a36b8; /* Less cool, deep royal dark blue */
+    --glow-white: #ffffff;
+}
+
+/* ==========================================
+   GLOBAL STYLES
+   ========================================== */
+body {
+    margin: 0;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    font-family: 'MyFonts', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-main);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    text-align: center;
+}
+
+/* ==========================================
+   HEADER SECTION
+   ========================================== */
+header {
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem); 
+    margin: 0 0 10px 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+    /* High-contrast dark blue and white mixed glow */
+    text-shadow: 
+        0 0 5px var(--glow-white),
+        0 0 15px var(--glow-blue),
+        0 0 30px var(--glow-blue);
+}
+
+header .subtitle {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+/* ==========================================
+   MAIN MENU (3-and-2 Centered Grid)
+   ========================================== */
+.mainmenusec {
+    display: grid;
+    /* Creates a 6-column grid structure to allow perfect centering of 3-card and 2-card rows */
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 25px;
+    max-width: 900px;
+    width: 100%;
+}
+
+/* First row items (Cards 1, 2, and 3): Each spans 2 grid columns */
+.mainmenusec details:nth-child(1),
+.mainmenusec details:nth-child(2),
+.mainmenusec details:nth-child(3) {
+    grid-column: span 2;
+}
+
+/* Second row items (Cards 4 and 5): Shifted to perfectly center at the bottom */
+.mainmenusec details:nth-child(4) {
+    grid-column: 2 / span 2; /* Starts at line 2, spans 2 spaces */
+}
+
+.mainmenusec details:nth-child(5) {
+    grid-column: 4 / span 2; /* Starts at line 4, spans 2 spaces */
+}
+
+/* Card Styling */
+details {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+details:hover, details[open] {
+    border-color: var(--glow-white);
+    /* Mixed deep blue and white edge glow */
+    box-shadow: 
+        0 0 8px rgba(255, 255, 255, 0.6),
+        0 0 20px var(--glow-blue),
+        0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+details:hover {
+    transform: translateY(-4px);
+}
+
+summary {
+    font-size: 1.2rem;
+    font-weight: 600;
+    list-style: none;
+    outline: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+details p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 15px 0;
+    line-height: 1.4;
+}
+
+/* CTA buttons inside cards */
+details a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--bg-dark);
+    background: var(--text-main);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: 0.2s ease;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+details a:hover {
+    background: var(--text-main);
+    color: var(--bg-dark);
+    box-shadow: 
+        0 0 5px var(--glow-white),
+        0 0 15px var(--glow-blue);
+}
+
+/* ==========================================
+   PERMISSION BANNER
+   ========================================== */
+.permissionmenu {
+    display: none; 
+    position: fixed; 
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    width: calc(100% - 40px);
+    max-width: 500px;
+    background: #1a1a1a; 
+    color: var(--text-main); 
+    padding: 20px; 
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.permissionmenu p {
+    margin: 0 0 15px 0;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.banner-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.details-link {
+    color: var(--text-muted);
+    text-decoration: underline;
+    font-size: 0.9rem;
+    margin-right: auto;
+}
+
+.permissionmenu button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+#accept-btn {
+    background: var(--text-main);
+    color: var(--bg-dark);
+}
+
+#accept-btn:hover {
+    box-shadow: 0 0 10px var(--glow-blue);
+}
+
+#reject-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+#reject-btn:hover {
+    color: var(--text-main);
+    border-color: var(--text-main);
+}
+
+/* ==========================================
+   CROSS-PLATFORM MEDIA QUERIES
+   ========================================== */
+@media (max-width: 768px) {
+    /* Tablet/Mobile fallback: Drop grid positions and drop down to single file cleanly */
+    .mainmenusec {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    details {
+        max-width: 280px; /* Uniform width on mobile */
+    }
+    
+    /* Reset specific column rules back to normal stack items for safety */
+    .mainmenusec details:nth-child(1),
+    .mainmenusec details:nth-child(2),
+    .mainmenusec details:nth-child(3),
+    .mainmenusec details:nth-child(4),
+    .mainmenusec details:nth-child(5) {
+        grid-column: auto;
+    }
+
+    .permissionmenu {
+        bottom: 10px;
+        width: calc(100% - 20px);
+    }
 }
