@@ -454,9 +454,122 @@ footer h3 {
 }
 
 /* ==========================================
+   OTHER QUEST ROW LAYOUT (WITH VIEW BUTTON)
+   ========================================== */
+.other-quests-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 900px;
+    width: 100%;
+    margin: 15px auto;
+    box-sizing: border-box;
+}
+
+.other-quests-grid details {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 14px 20px;
+    box-sizing: border-box;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+
+.other-quests-grid details[open] {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-color: rgba(138, 180, 248, 0.4);
+    box-shadow: 0 0 12px rgba(138, 180, 248, 0.15);
+}
+
+.other-quests-grid summary {
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #8ab4f8;
+    font-weight: 600;
+    white-space: nowrap;
+    padding-right: 20px;
+}
+
+/* Master wrapper paragraph pushed completely to the right wall */
+.other-quests-grid details p {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;    /* Keeps text and buttons perfectly level horizontally */
+    justify-content: flex-end; /* Locks text alignment against the right container edge */
+    gap: 15px;              /* Gapping separation space between descriptions and links */
+    flex: 1;
+}
+
+/* Description handling text block */
+.other-quests-grid .quest-desc {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    text-align: right;
+}
+
+/* Tactical HUD HUD Style Button Configuration */
+.other-quests-grid .view-quest-btn {
+    display: inline-block;
+    text-decoration: none;
+    font-family: 'MyFonts', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    color: #8ab4f8;
+    background: rgba(138, 180, 248, 0.05);
+    border: 1px solid rgba(138, 180, 248, 0.3);
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    white-space: nowrap; /* Keeps the action command text block from fragmenting lines */
+}
+
+/* Bright focus glow state when selected */
+.other-quests-grid .view-quest-btn:hover {
+    color: var(--bg-dark);
+    background: #8ab4f8;
+    border-color: #8ab4f8;
+    box-shadow: 0 0 10px rgba(138, 180, 248, 0.4);
+}
+
+/* ==========================================
    MOBILE COMPATIBILITY (CROSS-PLATFORM RULES)
    ========================================== */
 @media (max-width: 768px) {
+    .other-quests-grid details[open] {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* Flip row order to a dynamic text column stack so labels fall under descriptions nicely */
+    .other-quests-grid details p {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .other-quests-grid .quest-desc {
+        text-align: left;
+    }
+    
+    .other-quests-grid .view-quest-btn {
+        width: auto;
+        text-align: center;
+        padding: 6px 20px; /* Wider button hit area targets on small screen sizes */
+    }
     footer {
         padding: 25px 15px;
     }
