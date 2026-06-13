@@ -12,61 +12,107 @@
     font-style: italic;
 }
 
+:root {
+    --bg-dark: #121212;
+    --card-bg: #1e1e1e;
+    --text-main: #ffffff;
+    --text-muted: #b0b0b0;
+    
+    /* Matches Less-Cool Royal Cobalt Home & Portfolio Theme */
+    --glow-blue: #1a36b8; 
+    --glow-white: #ffffff;
+}
 
 body {
     margin: 0;
+    padding: 60px 20px 20px 20px; /* Top padding accommodates the relative/absolute back button spacing */
     font-family: 'MyFonts', sans-serif;
-    background: #121212;
-    color: #ffffff;
+    background: var(--bg-dark);
+    color: var(--text-main);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    box-sizing: border-box;
     text-align: center;
 }
 
-.backbutton{
+.backbutton {
     position: absolute;
-    top: 40px;
-    right: 10px;
-    transition: transform 0.3s ease;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
 }
 
 .backbutton a {
-    margin: 10px;
-    padding: 10px;
-    background-color: blue;
-    border: 2px solid black;
-    border-radius: 10px;
-    color: white;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: var(--text-main);
     text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
 }
 
-.backbutton:hover {
-    transform: translateY(5px);
+.backbutton a:hover {
+    border-color: var(--glow-white);
+    box-shadow: 0 0 10px var(--glow-blue);
+    transform: translateY(-2px);
 }
 
-h1{
-    font-size:40px ;
+h1.heading {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-top: 0;
+    margin-bottom: 20px; /* Tight vertical gap rules */
+    text-transform: uppercase;
+    letter-spacing: 1px;
     text-shadow:         
-        0 0 8px rgba(138, 180, 248, 0.6),
-        0 0 16px rgba(138, 180, 248, 0.4),
-        0 0 24px rgba(138, 180, 248, 0.2);
+        0 0 5px var(--glow-white),
+        0 0 15px var(--glow-blue);
+}
+
+h2 {
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 12px 0;
+}
+
+p {
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.5;
+    font-size: 0.95rem;
+    margin: 0 0 12px 0;
 }
 
 .settings-container {
     display: flex;
-    width: 800px;
-    height: 400px;
-    background: #1e1e1e;
+    max-width: 850px;
+    width: 100%;
+    min-height: 400px;
+    background: var(--card-bg);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 12px;
     overflow: hidden;
     box-shadow:
-        0 0 8px rgba(138, 180, 248, 0.6),
-        0 0 16px rgba(138, 180, 248, 0.4),
-        0 0 24px rgba(138, 180, 248, 0.2);
+        0 0 8px rgba(255, 255, 255, 0.4),
+        0 0 20px var(--glow-blue);
+    box-sizing: border-box;
 }
 
 input[type="radio"] {
@@ -75,81 +121,139 @@ input[type="radio"] {
 
 .sidebar {
     width: 200px;
-    background: #121212;
+    background: #151515;
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
+    padding-top: 15px;
     border-right: 1px solid rgba(255,255,255,0.1);
+    flex-shrink: 0;
 }
 
 .tab-label {
-    padding: 15px 25px;
+    padding: 14px 20px;
     cursor: pointer;
-    color: #b0b0b0;
+    color: var(--text-muted);
     font-weight: 600;
-    transition: 0.3s;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
     text-align: left;
 }
 
 .tab-label:hover {
-    color: #ffffff;
-    background: rgba(255,255,255,0.05);
+    color: var(--text-main);
+    background: rgba(255,255,255,0.03);
 }
 
 .content {
     flex: 1;
     padding: 30px;
     text-align: left;
+    background: var(--card-bg);
 }
 
 .tab-panel {
     display: none;
 }
 
-/* --- THE LOGIC --- */
+.tab-panel button, .tab-panel a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-family: 'MyFonts', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    margin-top: 10px;
+}
 
-/* When a radio is checked, find its matching label and highlight it */
+#interaction-counter {
+    text-shadow: 0 0 8px var(--glow-blue);
+}
+
+#reset-btn {
+    background: #a61c1c;
+    color: var(--text-main);
+}
+#reset-btn:hover {
+    background: #ff3b3b;
+    box-shadow: 0 0 10px rgba(255, 59, 59, 0.5);
+}
+
+#anim-toggle {
+    background: var(--text-main);
+    color: var(--bg-dark);
+}
+#anim-toggle:hover {
+    background: var(--text-main);
+    box-shadow: 0 0 12px var(--glow-blue);
+}
+
+#game-panel a {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+#game-panel a:hover {
+    border-color: var(--text-main);
+    background: var(--text-main);
+    color: var(--bg-dark);
+}
+
 #tab-clicks:checked ~ .sidebar .tab-label[for="tab-clicks"],
 #tab-anim:checked ~ .sidebar .tab-label[for="tab-anim"],
 #tab-game:checked ~ .sidebar .tab-label[for="tab-game"],
 #tab-explorer:checked ~ .sidebar .tab-label[for="tab-explorer"],
 #tab-easter:checked ~ .sidebar .tab-label[for="tab-easter"] {
-    color: #8ab4f8;
-    background: rgba(138, 180, 248, 0.1);
+    color: var(--text-main);
+    background: rgba(26, 54, 184, 0.25); /* Cobalt blue tint block */
+    border-left: 3px solid var(--text-main);
+    padding-left: 17px; /* Matches layout balancing alignment width */
 }
 
-/* When a radio is checked, find the specific panel and show it */
 #tab-clicks:checked ~ .content #clicks-panel,
 #tab-anim:checked ~ .content #anim-panel,
 #tab-game:checked ~ .content #game-panel,
 #tab-explorer:checked ~ .content #explorer-panel,
 #tab-easter:checked ~ .content #easter-panel {
     display: block;
-    animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateX(10px); }
-    to { opacity: 1; transform: translateX(0); }
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.permissionmenu{
-    display:none;
-    position:fixed; 
-    bottom:20px; 
-    left:20px; 
-    background:#333; 
-    color:#fff; 
-    padding:20px; 
-    border-radius:10px;
-    z-index:1000;
+.permissionmenu {
+    display: none; 
+    position: fixed; 
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    width: calc(100% - 40px);
+    max-width: 480px;
+    background: #181818; 
+    color: var(--text-main); 
+    padding: 20px; 
+    border-radius: 8px;
+    border: 1px solid var(--glow-blue);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    z-index: 1000;
+    box-sizing: border-box;
+    text-align: left;
 }
 
-/* The stage for our random characters */
 .random-character-stage {
     position: fixed;
-    z-index: 9999; /* Make sure it stays on top of everything */
-    pointer-events: none; /* Prevents the asset from blocking clicks on your site */
+    z-index: 9999;
+    pointer-events: none;
     display: none;
     transition: all 0.5s ease-in-out;
 }
@@ -158,18 +262,77 @@ input[type="radio"] {
     display: block;
     max-width: 100vw;
     max-height: 100vh;
-
-    /* --- FIX BLURRY IMAGES (CRISP PIXELS) --- */
-    image-rendering: pixelated;       /* For Chrome, Edge, and Safari */
-    image-rendering: crisp-edges;     /* For Firefox */
-
-    /* --- INCREASE CONTRAST & SHARPNESS --- */
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
     filter: contrast(115%) sharpness(10%); 
+    width: 150px;
+    height: auto;
 }
 
-/* Base styling for the asset inside */
-.random-character-stage img, 
-.random-character-stage video {
-    width: 150px; /* Adjust size based on your artwork */
-    height: auto;
+/* ==========================================
+   CROSS-PLATFORM MEDIA QUERIES (TABLETS & PHONES)
+   ========================================== */
+@media (max-width: 768px) {
+    body {
+        padding-top: 80px; /* Safe space allowance for the top header button link */
+    }
+
+    .backbutton {
+        top: 15px;
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .backbutton:hover {
+        transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* Flip HUD component block layout direction to stack elements up vertically */
+    .settings-container {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    /* Turn left side sidebar menu into a dynamic top horizontal touch panel list row */
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        padding-top: 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sidebar::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .sidebar::-webkit-scrollbar-thumb {
+        background: var(--glow-blue);
+    }
+
+    .tab-label {
+        padding: 15px 20px;
+        text-align: center;
+        flex: 0 0 auto;
+        font-size: 0.85rem;
+    }
+
+    /* Adjust logic line indicators to rest along the bottom on mobile views */
+    #tab-clicks:checked ~ .sidebar .tab-label[for="tab-clicks"],
+    #tab-anim:checked ~ .sidebar .tab-label[for="tab-anim"],
+    #tab-game:checked ~ .sidebar .tab-label[for="tab-game"],
+    #tab-explorer:checked ~ .sidebar .tab-label[for="tab-explorer"],
+    #tab-easter:checked ~ .sidebar .tab-label[for="tab-easter"] {
+        border-left: none;
+        border-bottom: 3px solid var(--text-main);
+        padding-left: 20px;
+        padding-bottom: 12px;
+    }
+
+    .content {
+        padding: 20px;
+    }
 }
