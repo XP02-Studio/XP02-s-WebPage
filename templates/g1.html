@@ -3,25 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Benchmark Test</title>
     <link rel="stylesheet" href="../static/gamestyle.css">
 </head>
 <body>
     <div class="backbutton">
         <a href="gamepage.html">Back</a>
     </div>
-    <div class="game-card">
+        <!-- THE LIVE F1 STARTING GRID GAME MODULE -->
+    <div id="reaction-game-anchor" class="game-card">
         <div class="game-header">
-            <h3>F1 Driver Test</h3>
-            <p>Click the panel below to prime the engine. When it turns solid green, click as fast as humanly possible!</p>
+            <h3>🏎️ F1 Lights Out Challenge</h3>
+            <p>Click the steering panel to arm the grid. Watch the 5 red lights engage. The instant they go out, click the launch pad!</p>
         </div>
-        <div id="reaction-pad" class="pad-idle">Click to Start</div>
+
+        <!-- F1 Gantry Housing Unit -->
+        <div class="f1-gantry">
+            <div class="light-post">
+                <div class="bulb-pair"><div class="bulb"></div><div class="bulb"></div></div>
+                <div class="bulb-pair"><div class="bulb"></div><div class="bulb"></div></div>
+                <div class="bulb-pair"><div class="bulb"></div><div class="bulb"></div></div>
+                <div class="bulb-pair"><div class="bulb"></div><div class="bulb"></div></div>
+                <div class="bulb-pair"><div class="bulb"></div><div class="bulb"></div></div>
+            </div>
+        </div>
+
+        <!-- Active Reaction Trigger Zone -->
+        <div id="reaction-pad" class="pad-idle">Click to Arm Engine</div>
         
         <div class="game-stats-row">
             <span id="reaction-current">Current: --</span>
             <span id="reaction-best">Personal Record: --</span>
         </div>
+
+        <!-- Dynamic Leaderboard Block -->
+        <div class="leaderboard-section">
+            <h4>🏁 Local Grand Prix Grid Standings</h4>
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Driver Name</th>
+                        <th>Reaction Time</th>
+                        <th>Performance Tier</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                    <!-- Programmatically generated rows go here -->
+                </tbody>
+            </table>
+        </div>
     </div>
+
     <script src="../script/games.js"></script>
 </body>
 </html>
