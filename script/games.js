@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let baselineTimestamp = 0;
     let lightTimers = [];
     let launchTimerId = null;
+    let audioCtx = null;
     
-    // Check local memory safely for historical scores
     let internalRecord = localStorage.getItem('local_reflex_record') || null;
 
     if (internalRecord) {
@@ -28,6 +28,38 @@ document.addEventListener('DOMContentLoaded', () => {
         low: ["Logan Sargeant", "Nikita Mazepin", "Nicholas Latifi"]
     };
 
+    // Synthesize Audio Effects via Web Audio API
+    function playSynthTone(frequency, type, duration) {
+        try {
+            // Lazy initialization to clear modern browser security blocks
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            oscillator.type = type; // 'sine', 'square', 'sawtooth', 'triangle'
+            oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+            
+            // Smooth volume fade out to prevent clicking artifacts
+            gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + duration);
+        } catch (e) {
+            console.warn("Audio Context blocked or unsupported:", e);
+        }
+    }
+
     function getRandomDriver(pool) {
         return pool[Math.floor(Math.random() * pool.length)];
     }
@@ -41,10 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return { tier: "Tractor Tier", key: "low" };
     }
 
-    // Dynamic Board Building Sequence
     function renderingLeaderboard(userMs) {
         leaderboardBody.innerHTML = ""; 
-        const isFreshPlayer = (userMs === 0);
         const userInfo = getDriverTierInfo(userMs);
         
         let driversData = [
@@ -74,18 +104,15 @@ document.addEventListener('DOMContentLoaded', () => {
             driversData.push({ name: "Valtteri Bottas", ms: 148, tier: "Pro Grid Racer", isUser: false });
         }
 
-        // Advanced sorting custom comparator handling the 0ms condition
         driversData.sort((a, b) => {
-            if (a.ms === 0) return 1;   // Shift unranked player down
-            if (b.ms === 0) return -1;  // Shift unranked rival down
-            return a.ms - b.ms;         // Fast times rise to rank 1
+            if (a.ms === 0) return 1;   
+            if (b.ms === 0) return -1;  
+            return a.ms - b.ms;         
         });
 
         driversData.slice(0, 5).forEach((driver, index) => {
             const row = document.createElement('tr');
             if (driver.isUser) row.className = "user-row";
-            
-            // Format time display clean text string
             const timingText = driver.ms === 0 ? "No Time" : `${driver.ms}ms`;
             
             row.innerHTML = `
@@ -98,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // BOOT UP STAGE RULE: Read current personal best to position on first initialization
     const initialBootScore = internalRecord ? parseInt(internalRecord) : 0;
     renderingLeaderboard(initialBootScore);
 
@@ -122,10 +148,13 @@ document.addEventListener('DOMContentLoaded', () => {
             resetLights();
             clearAllTimers();
 
+            // Ignite 5 pairs of red bulbs sequentially + trigger a crisp sync beep
             for (let i = 0; i < 5; i++) {
                 let timer = setTimeout(() => {
                     bulbs[i * 2].classList.add('red');
                     bulbs[(i * 2) + 1].classList.add('red');
+                    // Play a distinct high pitch F1 light indicator beep
+                    playSynthTone(880, 'sine', 0.12);
                 }, i * 800);
                 lightTimers.push(timer);
             }
@@ -143,16 +172,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     b.classList.add('green');
                 });
 
+                // Play the distinct, deep racing launch cue frequency
+                playSynthTone(440, 'sawtooth', 0.35);
                 baselineTimestamp = performance.now();
             }, absoluteLightsLitTimestamp + randomHoldTime);
 
         } else if (engineState === "countdown") {
+            // Jumpstart Penalization Route
             clearAllTimers();
             engineState = "idle";
             targetPad.className = "pad-idle";
             targetPad.textContent = "Jump Start! Click to Re-stage Grid";
             currentDisplay.textContent = "Current: DQ (Disqualified)";
             resetLights();
+            
+            // Play a harsh error buzz tone to indicate a false start
+            playSynthTone(120, 'sawtooth', 0.4);
 
         } else if (engineState === "triggered") {
             const clickTimestamp = performance.now();
@@ -165,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
             targetPad.innerHTML = `${totalScoreTime} ms<br><span style="font-size: 14px; font-weight:400;">Tier: ${evaluation.tier}</span>`;
             currentDisplay.textContent = `Current: ${totalScoreTime}ms`;
 
-            // Display your current runtime performance immediately on the grid
             renderingLeaderboard(totalScoreTime);
 
             if (!internalRecord || totalScoreTime < parseInt(internalRecord)) {
