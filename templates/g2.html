@@ -2,11 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Snake</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Retro Snake Canvas Grid</title>
     <link rel="stylesheet" href="../static/gamestyle.css">
 </head>
 <body>
-    
+    <div class="backbutton">
+        <a href="gamepage.html">Back</a>
+    </div>
+
+    <div id="snake-game-anchor" class="game-card">
+        <div class="game-header">
+            <h3>🐍 Snake: Retro Canvas Grid</h3>
+            <p>Use your Keyboard or the Touch Pad below to steer. Gather glowing nodes without hitting walls or your tail!</p>
+        </div>
+
+        <div style="background: #121212; border-radius: 8px; padding: 10px; display: inline-block; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1); max-width: 100%; box-sizing: border-box;">
+            <canvas id="snakeCanvas" width="400" height="400" style="display: block; background: #161616; border-radius: 4px; width: 100%; height: auto;"></canvas>
+        </div>
+        
+        <div class="game-stats-row">
+            <span id="snake-current">Score: 0</span>
+            <span id="snake-best" style="color: #8ab4f8;">High Score: --</span>
+        </div>
+
+        <div class="mobile-controls">
+            <button id="btn-up" class="ctrl-btn">▲</button>
+            <div class="ctrl-row">
+                <button id="btn-left" class="ctrl-btn">◀</button>
+                <button id="btn-restart" class="ctrl-btn action-btn">🔄</button>
+                <button id="btn-right" class="ctrl-btn">▶</button>
+            </div>
+            <button id="btn-down" class="ctrl-btn">▼</button>
+        </div>
+
+        <div id="snake-status-banner" style="font-weight: 600; color: #a0a0a0; font-size: 14px; margin-top: 15px; min-height: 20px;">
+            Press a Direction to Start
+        </div>
+    </div>
+
+    <script src="../script/snakescript.js"></script>
 </body>
 </html>
