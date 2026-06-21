@@ -390,3 +390,82 @@ h1 {
 .action-btn:active {
     background: #2563eb;
 }
+
+
+#memory-game-anchor {
+    max-width: 480px;
+}
+
+.matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+    perspective: 1000px; /* Activates 3D space depth */
+}
+
+.memory-card {
+    aspect-ratio: 1; /* Keeps them perfectly square */
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.memory-card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hides the reverse side content */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-sizing: border-box;
+}
+
+.card-front {
+    background: #252525;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #8ab4f8;
+}
+.memory-card:hover .card-front {
+    background: #2e2e2e;
+    border-color: #8ab4f8;
+}
+
+.card-back {
+    background: #1a1a1a;
+    border: 2px solid #8ab4f8;
+    transform: rotateY(180deg);
+    box-shadow: inset 0 0 15px rgba(138, 180, 248, 0.2);
+}
+
+.memory-card.matched .card-back {
+    border-color: #00ff66;
+    box-shadow: inset 0 0 15px rgba(0, 255, 102, 0.2);
+}
+
+#memory-status-banner {
+    letter-spacing: 0.5px;
+    font-size: 13px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    text-transform: uppercase;
+    font-weight: 600;
+}
